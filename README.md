@@ -1,2 +1,2 @@
-# backend
-Backend for bridge
+# Bridge Backend
+Repository for bridge's backend
