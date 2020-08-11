@@ -10,7 +10,9 @@ require("./mongoose_connection.js");
 
 //Routing
 const createUserRouter = require('./routes/authentication/create_user');
+const foodDataRouter = require('./routes/food_data/food_data')
 app.use('/create', createUserRouter);
+app.use('/foodData', foodDataRouter);
 
 //Listen on specified port
 app.listen(port, () => {
