@@ -12,14 +12,8 @@ Repository for bridge's backend
 ~ npm start
 ```
 
-## Implemented routes
-```
-/create
-/create/new
-/create/information
-
-/foodData
-```
+# Routes
+## /account./s
 
 
 

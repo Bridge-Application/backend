@@ -1,3 +1,4 @@
+//RUN APP.JS TO START SERVER
 const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
@@ -9,13 +10,11 @@ app.use(express.json());
 require("./mongoose_connection.js");
 
 //Routing
-const createUserRouter = require('./routes/authentication/create_user');
-const foodDataRouter = require('./routes/food_data/food_data')
-app.use('/create', createUserRouter);
-app.use('/foodData', foodDataRouter);
+const signupRouter = require('./routes/account/signup.js');
+app.use('/accounts', signupRouter);
 
 //Listen on specified port
 app.listen(port, () => {
-    console.log('Listening on port ' + port);
+    console.log('Sucessfully started on port ' + port);
 })
 
