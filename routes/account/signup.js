@@ -3,8 +3,10 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
+const sha256 = require('crypto-js/sha256');
 const userModel = require('../../schemas/userSchema');
 const userInformationModel = require('../../schemas/userInformationSchema');
+const institutionVerificationModel = require('../../schemas/institutionVerificationModel');
 
 router.get('/', (req, res) => {
     res.send("You've hit the /account route");
@@ -12,6 +14,8 @@ router.get('/', (req, res) => {
 
 router.post('/signup', async (req, res) => {
     try {
+
+        
         //Hash the password
         const hashedPassword = await bcrypt.hash(req.body.password, 6);
         //Create model
@@ -40,6 +44,18 @@ router.post('/signup', async (req, res) => {
 //Patient information
 router.post('/information', async (req, res) => {
     try {
+        //Check to see if code is valid
+        const code = sha256(req.body.firstName + req.body.lastName + req.body.institutionName + process.env.SALT);
+        const shortenCode = code.toString().substring(0, 5);
+        console.log(shortenCode);
+        
+        //Query institution database
+        const query = await institutionVerificationModel.findOne({firstName: req.body.firstName, lastName: req.body.lastName, code: shortenCode});
+        
+        if(!query){
+            throw "User does not exist"
+        }
+        
         const newUserInformation = new userInformationModel({
             dob: req.body.dob, //month.date.year
             weight: req.body.weight, //kilograms
@@ -47,19 +63,16 @@ router.post('/information', async (req, res) => {
             ethnicity: req.body.ethnicity, //single ethnicity
             sex: req.body.sex, //male or female
             diabetes: req.body.diabetes, //true or false
-            status: req.body.status, //unemployed, employed, student
+            status: req.body.status,
+            institutionName: req.body.institutionName, //unemployed, employed, student
             code: req.body.code, //5 digit code provided by instutiton
         });
 
         await newUserInformation.save();
-        res.status(200).send();
+        res.status(200).send("Sucessfully added information");
     } catch (error) {
-        console.log(error);
-        res.status(500).send();
+        res.status(500).send(error);
     }
-});
-router.get('/', (req, res) => {
-    res.send('Hit the page');
 });
 
 module.exports = router;

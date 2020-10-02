@@ -11,7 +11,9 @@ require("./mongoose_connection.js");
 
 //Routing
 const signupRouter = require('./routes/account/signup.js');
+const institutionDashboardRouter = require('./routes/institution/institution_dashboard')
 app.use('/accounts', signupRouter);
+app.use('/institutionDashboard', institutionDashboardRouter);
 
 //Listen on specified port
 app.listen(port, () => {

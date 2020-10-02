@@ -37,11 +37,16 @@ const userInformationSchema = new Schema({
         type: String,
         required: true,
     },
+    institutionName: {
+        type: String,
+        required: true,
+    },
     //Patient code
     code: {
-        type: Number,
+        type: String,
         required: true,
+        unique: true,
     }
 });
 
-module.exports = mongoose.model('accountInformations', userInformationSchema);
+module.exports = mongoose.model('userInformations', userInformationSchema);
