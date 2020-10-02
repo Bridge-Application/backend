@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
 router.post('/signup', async (req, res) => {
     try {
 
-        
+
         //Hash the password
         const hashedPassword = await bcrypt.hash(req.body.password, 6);
         //Create model
@@ -44,13 +44,10 @@ router.post('/signup', async (req, res) => {
 //Patient information
 router.post('/information', async (req, res) => {
     try {
-        //Check to see if code is valid
-        const code = sha256(req.body.firstName + req.body.lastName + req.body.institutionName + process.env.SALT);
-        const shortenCode = code.toString().substring(0, 5);
-        console.log(shortenCode);
+
         
-        //Query institution database
-        const query = await institutionVerificationModel.findOne({firstName: req.body.firstName, lastName: req.body.lastName, code: shortenCode});
+        //Query institution database, check to see if code is valid
+        const query = await institutionVerificationModel.findOne({firstName: req.body.firstName, lastName: req.body.lastName, code: req.body.code});
         
         if(!query){
             throw "User does not exist"
@@ -64,7 +61,9 @@ router.post('/information', async (req, res) => {
             sex: req.body.sex, //male or female
             diabetes: req.body.diabetes, //true or false
             status: req.body.status,
-            institutionName: req.body.institutionName, //unemployed, employed, student
+            institutionName: req.body.institutionName,
+            firstName: req.body.firstName,
+            lastName: req.body.lastName, //unemployed, employed, student
             code: req.body.code, //5 digit code provided by instutiton
         });
 
