@@ -15,6 +15,10 @@ const institutionDashboardRouter = require('./routes/institution/institution_das
 app.use('/accounts', signupRouter);
 app.use('/institutionDashboard', institutionDashboardRouter);
 
+app.get('/', (req, res) => {
+    res.send("See https://github.com/Bridge-Application/bridge-backend readme.md for API documentation");
+})
+
 //Listen on specified port
 app.listen(port, () => {
     console.log('Sucessfully started on port ' + port);
