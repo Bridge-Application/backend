@@ -26,5 +26,8 @@ router.post('/addPatient', async (req, res) => {
         res.status(500).send(error);
     }
 });
+router.get('/', (req, res) => {
+    res.send("You've hit the institution dashboard");
+})
 
 module.exports = router;

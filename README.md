@@ -1,6 +1,8 @@
 # Bridge Backend
-Repository for bridge's backend
+Repository for bridge's backend. 
 
+# Link
+http://bridge-backend.azurewebsites.net/
 
 # API ENDPOINTS
 1. __Part 1__: Signup with first name, last name, email, and password (part 2 is with the group code)
@@ -39,10 +41,15 @@ HTTP Body:
 
 3.  __Part 3__ Institution add patient detail
 ```
-POST 
+POST /institutionDashboard/addPatient
 
+HTTP Body:
+{
+    "firstName": "Isaac",               //string
+    "lastName: "Newton",                //string
+    "institutionName": "HospitalABC",   //string
+}
 ```
-
 
 ## Installation
 ```
