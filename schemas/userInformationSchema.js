@@ -7,6 +7,10 @@ const userInformationSchema = new Schema({
         type: String,
         required: true,
     },
+    height:{
+        type: Number,
+        required: true,
+    },
     //Kilograms
     weight: {
         type: Number,
@@ -32,6 +36,22 @@ const userInformationSchema = new Schema({
         type: Boolean,
         required: true,
     },
+    country:{
+        type: String,
+        required: true,
+    },
+    activityLevel:{
+        type: Number,
+        required: true,
+    },
+    weightManagementGoal:{
+        type: Number,
+        required: true,
+    },
+    calorieGoal:{
+        type: Number,
+        required: true,
+    },
     //Employed, unemployed, or student
     status: {
         type: String,
@@ -42,7 +62,7 @@ const userInformationSchema = new Schema({
         required: true,
     },
     //Patient code
-    code: {
+    code:{
         type: String,
         required: true,
         unique: true,
@@ -52,6 +72,10 @@ const userInformationSchema = new Schema({
         required: true,
     },
     lastName: {
+        type: String,
+        required: true,
+    },
+    email: {
         type: String,
         required: true,
     }

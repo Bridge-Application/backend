@@ -5,7 +5,7 @@ Repository for bridge's backend.
 http://bridge-backend.azurewebsites.net/
 
 # API ENDPOINTS
-1. __Part 1__: Signup with first name, last name, email, and password (part 2 is with the group code)
+1. __Part 1__: Signup with first name, last name, email, and password (part 2 is with/without the group code)
 ```
 POST /accounts/signup
 
@@ -20,28 +20,34 @@ HTTP Body:
 
 2. __Part 2__ Add user information (This part needs the group code)
 ```
-POST /accounts/information
+POST /accounts/signup/information
 
 HTTP Body:
 {
-    "firstName": "Isaac",               //string
-    "lastName: "Newton",                //string
-    "institutionName": "HospitalABC",   //string
-    "code": "f1230",                    //string
+    "email": "isaacnewton@gmail.com"    //string
+    "password": "abcdefg123"            //string
+    "research" true                     //bool (determines if user is research participant)
+    "code": "f1230",                    //string (only applicable if user is research participant)
     "dob": "06.23.2001",                //string
-    "weight": 50,                       //integer or double
+    "weight": 50,                       //double
     "smoke": true,                      //boolean
     "ethnicity": "White"                //string
     "sex": "male"                       //string
     "diabetes": true                    //boolean
     "status": "student"                 //string
-    "institutionName": "HopsitalABC"    //string
+    "calorieGoal" : 123.4               //double
+    "weightManagementGoal": 40          //double
+    "activityLevel": 30                 //double
+    "country": "Japan"                  //string
+    "height": 20                        //double
 }
 ```
 
-3.  __Part 3__ Institution add patient detail
+3.  __Institution__ Institution add patient detail
 ```
 POST /institutionDashboard/addPatient
+
+~ If sucessfully added, returns the group code
 
 HTTP Body:
 {
@@ -51,6 +57,19 @@ HTTP Body:
 }
 ```
 
+4. __Part 4__ Insert food into food diary
+```
+HTTP Body:
+{
+    "email": "newton@gmail.com",        //string
+    "password: "abcdefg123",            //string
+    "servingSize": 2                    //double
+    "cholesterol: 20,                   //double
+    "fat": 30,                          //double
+    "carbohydrates": 40,                //double
+    "sodium": 90,                       //double
+}
+```
 ## Installation
 ```
 ~ npm install
