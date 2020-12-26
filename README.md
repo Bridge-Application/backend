@@ -16,6 +16,11 @@ HTTP Body:
     "email": "isaacnewton@gmail.com",
     "password: "abcdefg123",
 }
+
+Status Codes:
+200 - Account has been created
+409 - Duplicate email in database
+500 - General error (error will be sent back in response)
 ```
 
 2. __Part 2__ Add user information (This part needs the group code)
@@ -41,6 +46,10 @@ HTTP Body:
     "country": "Japan"                  //string
     "height": 20                        //double
 }
+
+Status Codes:
+200 - Information has been added
+500 - General error (error will be sent back in response)
 ```
 
 3.  __Institution__ Institution add patient detail
@@ -55,6 +64,10 @@ HTTP Body:
     "lastName: "Newton",                //string
     "institutionName": "HospitalABC",   //string
 }
+
+Status Codes:
+200 - Patient sucessfully added to database. Also returns unique code.
+500 - General error (error will be sent back in response)
 ```
 
 4. __Part 4__ Insert food into food diary
@@ -79,7 +92,3 @@ HTTP Body:
 ```
 ~ npm start
 ```
-
-
-
-
